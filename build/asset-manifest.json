@@ -1,6 +1,6 @@
 {
   "main.css": "styles.css",
   "main.css.map": "styles.css.map",
-  "main.js": "Select.js",
-  "main.js.map": "Select.js.map"
+  "main.js": "select.js",
+  "main.js.map": "select.js.map"
 }
