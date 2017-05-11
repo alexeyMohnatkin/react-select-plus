@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import React from 'react';
 
-function isGroup (option) {
+function isGroup(option) {
 	return option && Array.isArray(option.options);
 }
 
-function menuRenderer ({
+function menuRenderer({
 	focusedOption,
 	instancePrefix,
 	labelKey,
@@ -42,18 +42,18 @@ function menuRenderer ({
 						{renderOptions(option.options)}
 					</OptionGroup>
 				);
-			} else {
-				let isSelected = valueArray && valueArray.indexOf(option) > -1;
-				let isFocused = option === focusedOption;
-				let optionRef = isFocused ? 'focused' : null;
-				let optionClass = classNames(optionClassName, {
-					'Select-option': true,
-					'is-selected': isSelected,
-					'is-focused': isFocused,
-					'is-disabled': option.disabled,
-				});
+			}
+			let isSelected = valueArray && valueArray.indexOf(option) > -1;
+			let isFocused = option === focusedOption;
+			let optionRef = isFocused ? 'focused' : null;
+			let optionClass = classNames(optionClassName, {
+				'Select-option': true,
+				'is-selected': isSelected,
+				'is-focused': isFocused,
+				'is-disabled': option.disabled,
+			});
 
-				return (
+			return (
 					<Option
 						className={optionClass}
 						instancePrefix={instancePrefix}
@@ -65,12 +65,14 @@ function menuRenderer ({
 						onSelect={onSelect}
 						option={option}
 						optionIndex={i}
-						ref={ref => { onOptionRef(ref, isFocused); }}
+						ref={ref => {
+							onOptionRef(ref, isFocused);
+						}}
 					>
 						{renderLabel(option, i)}
 					</Option>
-				);
-			}
+			);
+			
 		});
 	};
 

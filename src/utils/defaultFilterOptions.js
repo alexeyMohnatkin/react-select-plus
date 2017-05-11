@@ -1,22 +1,26 @@
 import stripDiacritics from './stripDiacritics';
 
-function filterOptions (options, filterValue, excludeOptions, props) {
+function filterOptions(options, filterValue, excludeOptions, props) {
+
+	let filteredValue = filterValue;
+
 	if (props.ignoreAccents) {
-		filterValue = stripDiacritics(filterValue);
+		filteredValue = stripDiacritics(filteredValue);
 	}
 
 	if (props.ignoreCase) {
-		filterValue = filterValue.toLowerCase();
+		filteredValue = filteredValue.toLowerCase();
 	}
 
-	if (excludeOptions) excludeOptions = excludeOptions.map(i => i[props.valueKey]);
+	const excludedOptions = !!excludeOptions && excludeOptions.map(i => i[props.valueKey]);
 
 	return options.filter(option => {
-		if (excludeOptions && excludeOptions.indexOf(option[props.valueKey]) > -1) return false;
-		if (props.filterOption) return props.filterOption.call(this, option, filterValue);
-		if (!filterValue) return true;
-		var valueTest = String(option[props.valueKey]);
-		var labelTest = String(option[props.labelKey]);
+		if (excludedOptions && excludedOptions.indexOf(option[props.valueKey]) > -1) return false;
+		if (props.filterOption) return props.filterOption.call(this, option, filteredValue);
+		if (!filteredValue) return true;
+		let valueTest = String(option[props.valueKey]);
+		let labelTest = String(option[props.labelKey]);
+
 		if (props.ignoreAccents) {
 			if (props.matchProp !== 'label') valueTest = stripDiacritics(valueTest);
 			if (props.matchProp !== 'value') labelTest = stripDiacritics(labelTest);
@@ -26,13 +30,13 @@ function filterOptions (options, filterValue, excludeOptions, props) {
 			if (props.matchProp !== 'value') labelTest = labelTest.toLowerCase();
 		}
 		return props.matchPos === 'start' ? (
-			(props.matchProp !== 'label' && valueTest.substr(0, filterValue.length) === filterValue) ||
-			(props.matchProp !== 'value' && labelTest.substr(0, filterValue.length) === filterValue)
+			(props.matchProp !== 'label' && valueTest.substr(0, filteredValue.length) === filteredValue) ||
+			(props.matchProp !== 'value' && labelTest.substr(0, filteredValue.length) === filteredValue)
 		) : (
-			(props.matchProp !== 'label' && valueTest.indexOf(filterValue) >= 0) ||
-			(props.matchProp !== 'value' && labelTest.indexOf(filterValue) >= 0)
+			(props.matchProp !== 'label' && valueTest.indexOf(filteredValue) >= 0) ||
+			(props.matchProp !== 'value' && labelTest.indexOf(filteredValue) >= 0)
 		);
 	});
 }
 
-module.exports = filterOptions;
+export default filterOptions;
