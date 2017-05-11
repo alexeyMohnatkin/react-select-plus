@@ -1,6 +1,6 @@
 {
   "name": "react-select-plus",
-  "main": "src/Select.js",
+  "main": "build/select.js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

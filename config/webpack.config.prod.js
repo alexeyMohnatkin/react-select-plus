@@ -6,6 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+var path = require('path');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
 
@@ -29,7 +30,7 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = 'static/css/[name].[contenthash:8].css';
+const cssFilename = 'styles.css';
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -52,7 +53,8 @@ module.exports = {
 	// In production, we only want to load the polyfills and the app code.
 	entry: [
 		require.resolve('./polyfills'),
-		paths.appIndexJs
+		path.resolve('src/Select.js'),
+		// paths.appIndexJs
 	],
 	output: {
 		// The build folder.
@@ -60,8 +62,8 @@ module.exports = {
 		// Generated JS file names (with nested folders).
 		// There will be one main bundle, and one file per asynchronous chunk.
 		// We don't currently advertise code splitting but Webpack supports it.
-		filename: 'static/js/[name].[chunkhash:8].js',
-		chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+		filename: 'Select.js',
+		// chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
 		// We inferred the "public path" (such as / or /my-project) from homepage.
 		publicPath: publicPath
 	},
@@ -106,6 +108,7 @@ module.exports = {
 					/\.html$/,
 					/\.(js|jsx)$/,
 					/\.css$/,
+					/\.scss$/,
 					/\.json$/,
 					/\.svg$/
 				],
@@ -135,10 +138,11 @@ module.exports = {
 			// use the "style" loader inside the async code so CSS from them won't be
 			// in the main CSS file.
 			{
-				test: /\.css$/,
+				test: /\.scss$/,
 				loader: ExtractTextPlugin.extract(
 					'style',
-					'css?importLoaders=1!postcss',
+					// 'css?importLoaders=1!postcss',
+					'css?importLoaders=1!sass',
 					extractTextPluginOptions
 				)
 				// Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
