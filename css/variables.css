@@ -1,0 +1,72 @@
+/**
+ * React Select Plus
+ * =================
+ * MIT License: https://github.com/HubSpot/react-select-plus
+*/
+
+/*
+Variables
+------------------------------
+*/
+:root {
+	/*control options*/
+	--select-input-bg:                   #fff;
+	--select-input-bg-disabled:          #f9f9f9;
+	--select-input-border-color:         #ccc;
+	--select-input-border-radius:        4px;
+	--select-input-border-focus:         #08c; /*blue*/
+	--select-input-border-width:         1px;
+	--select-input-height:               36px;
+	--select-input-internal-height:      calc(var(--select-input-height) - (var(--select-input-border-width) * 2));
+	--select-input-placeholder:          #aaa;
+	--select-text-color:                 #333;
+	--select-link-hover-color:           var(--select-input-border-focus);
+
+	--select-padding-vertical:           8px;
+	--select-padding-horizontal:         10px;
+
+	/*menu options*/
+	--select-menu-zindex:                1000;
+	--select-menu-max-height:            200px;
+
+	--select-option-color:               color(var(--select-text-color) lightness(+20%));
+	--select-option-bg:                  var(--select-input-bg);
+	--select-option-focused-color:       var(--select-text-color);
+	--select-option-focused-bg:          #f2f9fc; /*pale blue*/
+	--select-option-selected-color:      var(--select-text-color);
+	--select-option-selected-bg:         #f5faff; /*lightest blue*/
+	--select-option-disabled-color:      color(var(--select-text-color) lightness(+60%));
+
+	--select-noresults-color:            color(var(--select-text-color) lightness(+40%));
+
+	/*clear "x" button*/
+	--select-clear-size:                 calc((var(--select-input-height) / 2));
+	--select-clear-color:                #999;
+	--select-clear-hover-color:          #D0021B; /*red*/
+	--select-clear-width:                calc(var(--select-input-internal-height) / 2);
+
+	/*arrow indicator*/
+	--select-arrow-color:                #999;
+	--select-arrow-color-hover:          #666;
+	--select-arrow-width:                5px;
+
+	/*spinner*/
+	--select-spinner-size:               16px;
+	--select-spinner-color:              var(--select-text-color);
+	--select-spinner-color-bg:           var(--select-input-border-color);
+
+	/*multi-select item*/
+	--select-item-border-radius:         2px;
+	--select-item-gutter:                5px;
+	--select-item-padding-vertical:      2px;
+	--select-item-padding-horizontal:    5px;
+	--select-item-font-size:             .9em;
+	--select-item-color:                 #08c; /*pale blue*/
+	--select-item-bg:                    #f2f9fc;
+	--select-item-border-color:          color(var(--select-item-bg) lightness(-10%));
+	--select-item-hover-color:           color(var(--select-item-color) lightness(-5%)); /*pale blue*/
+	--select-item-hover-bg:              color(var(--select-item-bg) lightness(-5%));
+	--select-item-disabled-color:        #333;
+	--select-item-disabled-bg:           #fcfcfc;
+	--select-item-disabled-border-color: color(var(--select-item-disabled-bg) lightness(-10%));
+}

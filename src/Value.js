@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { themr } from 'react-css-themr';
 
+import defaultTheme from '../css/default.css';
+@themr('React-Select-Plus', defaultTheme)
 class Value extends Component {
 
 	static displayName = 'Value';
@@ -58,8 +61,10 @@ class Value extends Component {
 
 	renderRemoveIcon() {
 		if (this.props.disabled || !this.props.onRemove) return;
+		const { theme } = this.props;
+
 		return (
-			<span className="Select-value-icon"
+			<span className={theme.valueIcon}
 				aria-hidden="true"
 				onMouseDown={this.onRemove}
 				onTouchEnd={this.handleTouchEndRemove}
@@ -71,7 +76,8 @@ class Value extends Component {
 	}
 
 	renderLabel() {
-		let className = 'Select-value-label';
+		const { theme } = this.props;
+		let className = theme.valueLabel;
 
 		return this.props.onClick || this.props.value.href ? (
 			<a className={className} href={this.props.value.href} target={this.props.value.target} onMouseDown={this.handleMouseDown} onTouchEnd={this.handleMouseDown}>
@@ -85,8 +91,10 @@ class Value extends Component {
 	}
 
 	render() {
+		const { theme } = this.props;
+
 		return (
-			<div className={classNames('Select-value', this.props.value.className)}
+			<div className={classNames(theme.value, this.props.value.className)}
 				style={this.props.value.style}
 				title={this.props.value.title}
 				>

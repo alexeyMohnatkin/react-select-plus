@@ -118,7 +118,8 @@ export default class Async extends Component {
 	}
 
 	inputValue() {
-		if (this.select) {
+		// TODO: get 'select' ref from Themed component
+		if (this.select && this.select.state) {
 			return this.select.state.inputValue;
 		}
 		return '';

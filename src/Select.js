@@ -8,6 +8,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import AutosizeInput from 'react-input-autosize';
 import classNames from 'classnames';
+import { themr } from 'react-css-themr';
 
 import defaultArrowRenderer from './utils/defaultArrowRenderer';
 import defaultFilterOptions from './utils/defaultFilterOptions';
@@ -44,6 +45,8 @@ let instanceId = 1;
 
 const invalidOptions = {};
 
+import defaultTheme from '../css/default.css';
+@themr('React-Select-Plus', defaultTheme)
 class Select extends Component {
 
 	static displayName = 'Select';
@@ -736,19 +739,22 @@ class Select extends Component {
 
 	renderLoading() {
 		if (!this.props.isLoading) return;
+		const { theme } = this.props;
+
 		return (
-			<span className="Select-loading-zone" aria-hidden="true">
-				<span className="Select-loading" />
+			<span className={theme.spinnerZone} aria-hidden="true">
+				<span className={theme.spinner} />
 			</span>
 		);
 	}
 
 	renderValue(valueArray, isOpen) {
+		const { theme } = this.props;
 		let renderLabel = this.props.valueRenderer || this.getOptionLabel;
 		let ValueComponent = this.props.valueComponent;
 
 		if (!valueArray.length) {
-			return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
+			return !this.state.inputValue ? <div className={theme.placeholder}>{this.props.placeholder}</div> : null;
 		}
 		let onClick = this.props.onValueClick ? this.handleValueClick : null;
 
@@ -765,7 +771,7 @@ class Select extends Component {
 						value={value}
 					>
 						{renderLabel(value, i)}
-						<span className="Select-aria-only">&nbsp;</span>
+						<span className={theme.ariaOnly}>&nbsp;</span>
 					</ValueComponent>
 				);
 			});
@@ -786,7 +792,8 @@ class Select extends Component {
 	}
 
 	renderInput(valueArray, focusedOptionIndex) {
-		var className = classNames('Select-input', this.props.inputProps.className);
+		const { theme } = this.props;
+		const className = classNames(theme.input, this.props.inputProps.className);
 		const isOpen = !!this.state.isOpen;
 
 		const ariaOwns = classNames({
@@ -855,17 +862,18 @@ class Select extends Component {
 
 	renderClear() {
 		if (!this.props.clearable || (!this.props.value || this.props.value === 0) || (this.props.multi && !this.props.value.length) || this.props.disabled || this.props.isLoading) return;
-		const clear = this.props.clearRenderer();
+		const { theme } = this.props;
+		const Clear = this.props.clearRenderer;
 
 		return (
-			<span className="Select-clear-zone" title={this.props.multi ? this.props.clearAllText : this.props.clearValueText}
+			<span className={theme.clearZone} title={this.props.multi ? this.props.clearAllText : this.props.clearValueText}
 				aria-label={this.props.multi ? this.props.clearAllText : this.props.clearValueText}
 				onMouseDown={this.clearValue}
 				onTouchStart={this.handleTouchStart}
 				onTouchMove={this.handleTouchMove}
 				onTouchEnd={this.handleTouchEndClearValue}
 			>
-				{clear}
+				<Clear theme={theme} />
 			</span>
 		);
 	}
@@ -873,14 +881,15 @@ class Select extends Component {
 	renderArrow() {
 		const onMouseDown = this.handleMouseDownOnArrow;
 		const isOpen = this.state.isOpen;
-		const arrow = this.props.arrowRenderer({ onMouseDown, isOpen });
+		const { theme } = this.props;
+		const Arrow = this.props.arrowRenderer;
 
 		return (
 			<span
-				className="Select-arrow-zone"
+				className={theme.arrowZone}
 				onMouseDown={onMouseDown}
 			>
-				{arrow}
+				<Arrow onMouseDown={onMouseDown} isOpen={isOpen} theme={theme} />
 			</span>
 		);
 	}
@@ -982,6 +991,8 @@ class Select extends Component {
 	}
 
 	renderMenu(options, valueArray, focusedOption) {
+		const { theme } = this.props;
+
 		if (options && options.length) {
 			return this.props.menuRenderer({
 				focusedOption,
@@ -999,10 +1010,11 @@ class Select extends Component {
 				selectValue: this.selectValue,
 				valueArray,
 				valueKey: this.props.valueKey,
+				theme,
 			});
 		} else if (this.props.noResultsText) {
 			return (
-				<div className="Select-noresults">
+				<div className={theme.noresults}>
 					{this.props.noResultsText}
 				</div>
 			);
@@ -1071,11 +1083,12 @@ class Select extends Component {
 		if (!menu) {
 			return null;
 		}
+		const { theme } = this.props;
 
 		return (
       <Dropdown>
-        <div ref={ref => this.menuContainer = ref} className="Select-menu-outer" style={this.props.menuContainerStyle}>
-          <div ref={ref => this.menu = ref} role="listbox" className="Select-menu" id={this._instancePrefix + '-list'}
+        <div ref={ref => this.menuContainer = ref} className={theme.menuOuter} style={this.props.menuContainerStyle}>
+          <div ref={ref => this.menu = ref} role="listbox" className={theme.menu} id={this._instancePrefix + '-list'}
                style={this.props.menuStyle}
                onScroll={this.handleMenuScroll}
                onMouseDown={this.handleMouseDownOnMenu}>
@@ -1087,6 +1100,7 @@ class Select extends Component {
 	}
 
 	render() {
+		const { theme } = this.props;
 		let valueArray = this.getValueArray(this.props.value);
 
 		this._visibleOptions = this.filterFlatOptions(this.props.multi ? valueArray : null);
@@ -1103,17 +1117,20 @@ class Select extends Component {
 		} else {
 			focusedOption = this._focusedOption = null;
 		}
-		let className = classNames('Select', this.props.className, {
-			'Select--multi': this.props.multi,
-			'Select--single': !this.props.multi,
-			'is-disabled': this.props.disabled,
-			'is-focused': this.state.isFocused,
-			'is-loading': this.props.isLoading,
-			'is-open': isOpen,
-			'is-pseudo-focused': this.state.isPseudoFocused,
-			'is-searchable': this.props.searchable,
-			'has-value': valueArray.length,
-		});
+		let className = classNames(
+			theme.Select,
+			this.props.className,
+
+			this.props.multi && theme.multi,
+			!this.props.multi && theme.single,
+			this.props.disabled && theme.isDisabled,
+			this.state.isFocused && theme.isFocused,
+			this.props.isLoading && theme.isLoading,
+			isOpen && theme.isOpen,
+			this.state.isPseudoFocused && theme.isPseudoFocused,
+			this.props.searchable && theme.isSearchable,
+			valueArray.length && theme.hasValue,
+		);
 
 		let removeMessage = null;
 
@@ -1124,7 +1141,7 @@ class Select extends Component {
 			this.state.isFocused &&
 			this.props.backspaceRemoves) {
 			removeMessage = (
-				<span id={this._instancePrefix + '-backspace-remove-message'} className="Select-aria-only" aria-live="assertive">
+				<span id={this._instancePrefix + '-backspace-remove-message'} className={theme.ariaOnly} aria-live="assertive">
 					{this.props.backspaceToRemoveMessage.replace('{label}', valueArray[valueArray.length - 1][this.props.labelKey])}
 				</span>
 			);
@@ -1137,7 +1154,7 @@ class Select extends Component {
 			>
 				{this.renderHiddenField(valueArray)}
 				<div ref={ref => this.control = ref}
-					className="Select-control"
+					className={theme.control}
 					style={this.props.style}
 					onKeyDown={this.handleKeyDown}
 					onMouseDown={this.handleMouseDown}
@@ -1145,7 +1162,7 @@ class Select extends Component {
 					onTouchStart={this.handleTouchStart}
 					onTouchMove={this.handleTouchMove}
 				>
-					<span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+					<span className={theme.multiValueWrapper} id={this._instancePrefix + '-value'}>
 						{this.renderValue(valueArray, isOpen)}
 						{this.renderInput(valueArray, focusedOptionIndex)}
 					</span>
@@ -1246,6 +1263,7 @@ Select.propTypes = {
 	'valueKey': PropTypes.string,           // path of the label value in option objects
 	'valueRenderer': PropTypes.func,        // valueRenderer: function (option) {}
 	'wrapperStyle': PropTypes.object,       // optional style to apply to the component wrapper
+	'theme': PropTypes.object,
 };
 
 Select.defaultProps = {

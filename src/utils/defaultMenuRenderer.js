@@ -19,6 +19,7 @@ function menuRenderer({
 	options,
 	valueArray,
 	valueKey,
+	theme,
 }) {
 	let OptionGroup = optionGroupComponent;
 	let Option = optionComponent;
@@ -27,13 +28,9 @@ function menuRenderer({
 	const renderOptions = (optionsSubset) => {
 		return optionsSubset.map((option, i) => {
 			if (isGroup(option)) {
-				let optionGroupClass = classNames({
-					'Select-option-group': true,
-				});
-
 				return (
 					<OptionGroup
-						className={optionGroupClass}
+						className={theme.optionGroup}
 						key={`option-group-${i}`}
 						label={renderLabel(option)}
 						option={option}
@@ -46,12 +43,13 @@ function menuRenderer({
 			let isSelected = valueArray && valueArray.indexOf(option) > -1;
 			let isFocused = option === focusedOption;
 			let optionRef = isFocused ? 'focused' : null;
-			let optionClass = classNames(optionClassName, {
-				'Select-option': true,
-				'is-selected': isSelected,
-				'is-focused': isFocused,
-				'is-disabled': option.disabled,
-			});
+			let optionClass = classNames(
+				theme.option,
+				optionClassName,
+				isSelected && theme.isSelected,
+				isFocused && theme.isFocused,
+				option.disabled && theme.isDisabled,
+			);
 
 			return (
 					<Option
@@ -72,7 +70,7 @@ function menuRenderer({
 						{renderLabel(option, i)}
 					</Option>
 			);
-			
+
 		});
 	};
 

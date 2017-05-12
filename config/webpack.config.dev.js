@@ -138,7 +138,7 @@ module.exports = {
 			// in development "style" loader enables hot editing of CSS.
 			{
 				test: /\.css$/,
-				loader: 'style!css?importLoaders=1!postcss'
+				loader: 'style!css?modules=true&importLoaders=1&localIdentName=[path]--[name]__[local]!postcss'
 			},
 			{
 				test: /\.scss$/,
@@ -166,14 +166,8 @@ module.exports = {
 	// We use PostCSS for autoprefixing only.
 	postcss: function() {
 		return [
-			autoprefixer({
-				browsers: [
-					'>1%',
-					'last 4 versions',
-					'Firefox ESR',
-					'not ie < 9', // React doesn't support IE8 anyway
-				]
-			}),
+			require('postcss-import'),
+			require('postcss-cssnext'),
 		];
 	},
 	plugins: [

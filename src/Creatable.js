@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { themr } from 'react-css-themr';
 import Select from './Select';
 import defaultFilterOptions from './utils/defaultFilterOptions';
 import defaultMenuRenderer from './utils/defaultMenuRenderer';
@@ -9,6 +10,8 @@ function defaultChildren(props) {
 	);
 }
 
+import defaultTheme from '../css/default.css';
+@themr('React-Select-Plus', defaultTheme)
 class Creatable extends Component {
 	static displayName = 'CreatableSelect';
 
@@ -208,11 +211,12 @@ function isValidNewOption({ label }) {
 }
 
 function newOptionCreator({ label, labelKey, valueKey }) {
+	const { theme } = this.props;
 	const option = {};
 
 	option[valueKey] = label;
 	option[labelKey] = label;
-	option.className = 'Select-create-option-placeholder';
+	option.className = theme.createOptionPlaceholder;
 	return option;
 }
 
