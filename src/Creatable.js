@@ -3,6 +3,11 @@ import Select from './Select';
 import defaultFilterOptions from './utils/defaultFilterOptions';
 import defaultMenuRenderer from './utils/defaultMenuRenderer';
 
+function defaultChildren(props) {
+	return (
+		<Select {...props} />
+	);
+}
 
 class Creatable extends Component {
 	static displayName = 'CreatableSelect';
@@ -187,12 +192,6 @@ class Creatable extends Component {
 
 		return children(props);
 	}
-}
-
-function defaultChildren(props) {
-	return (
-		<Select {...props} />
-	);
 }
 
 function isOptionUnique({ option, options, labelKey, valueKey }) {

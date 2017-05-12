@@ -53,7 +53,7 @@ module.exports = {
 	// In production, we only want to load the polyfills and the app code.
 	entry: [
 		require.resolve('./polyfills'),
-		path.resolve('src/Select.js'),
+		path.resolve('Examples/index.js'),
 		// paths.appIndexJs
 	],
 	output: {
@@ -91,7 +91,7 @@ module.exports = {
 			{
 				test: /\.(js|jsx)$/,
 				loader: 'eslint',
-				include: paths.appSrc
+				include: paths.devPaths
 			}
 		],
 		loaders: [
@@ -121,7 +121,7 @@ module.exports = {
 			// Process JS with Babel.
 			{
 				test: /\.(js|jsx)$/,
-				include: paths.appSrc,
+				include: paths.devPaths,
 				loader: 'babel',
 
 			},

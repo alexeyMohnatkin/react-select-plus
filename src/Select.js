@@ -22,9 +22,6 @@ import Option from './Option';
 import OptionGroup from './OptionGroup';
 import Value from './Value';
 
-import styles from './scss/default.scss';
-// console.log(styles);
-
 function isGroup(option) {
 	return option && Array.isArray(option.options);
 }

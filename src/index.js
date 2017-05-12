@@ -1,9 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './Examples/App';
-// import './index.css';
+import Select from './Select';
+import Async from './Async';
+import Creatable from './Creatable';
+import AsyncCreatable from './AsyncCreatable';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export { Async, Creatable, AsyncCreatable };
+export default Select;
