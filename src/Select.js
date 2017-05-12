@@ -1019,7 +1019,7 @@ class Select extends Component {
 			return (
 				<input
 					type="hidden"
-					ref={ref => this.value = ref}
+					// ref={ref => this.value = ref}
 					name={this.props.name}
 					value={value}
 					disabled={this.props.disabled} />
@@ -1028,7 +1028,7 @@ class Select extends Component {
 		return valueArray.map((item, index) => (
 			<input key={'hidden.' + index}
 				type="hidden"
-				ref={'value' + index}
+				// ref={'value' + index}
 				name={this.props.name}
 				value={stringifyValue(item[this.props.valueKey])}
 				disabled={this.props.disabled} />
