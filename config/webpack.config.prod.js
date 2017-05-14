@@ -138,11 +138,11 @@ module.exports = {
 			// use the "style" loader inside the async code so CSS from them won't be
 			// in the main CSS file.
 			{
-				test: /\.scss$/,
+				test: /\.css$/,
 				loader: ExtractTextPlugin.extract(
 					'style',
 					// 'css?importLoaders=1!postcss',
-					'css?importLoaders=1!sass',
+					'css??modules=true&importLoaders=1&localIdentName=[path]--[name]__[local]!postcss',
 					extractTextPluginOptions
 				)
 				// Note: this won't work without `new ExtractTextPlugin()` in `plugins`.

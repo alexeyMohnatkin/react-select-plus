@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from './Select';
+import { themr } from 'react-css-themr';
 
 function reduce(obj, props = {}) {
 	return Object.keys(obj)
@@ -13,6 +14,7 @@ function reduce(obj, props = {}) {
 		}, props);
 }
 
+@themr('React-Select-Plus')
 class AsyncCreatable extends Component {
 	static displayName = 'AsyncCreatableSelect';
 
@@ -32,9 +34,9 @@ class AsyncCreatable extends Component {
 									creatableProps.onInputChange(input);
 									return asyncProps.onInputChange(input);
 								}}
-								ref={(ref) => {
+								innerRef={(ref) => {
 									this.select = ref;
-									creatableProps.ref(ref);
+									creatableProps.innerRef(ref);
 									asyncProps.ref(ref);
 								}}
 							/>

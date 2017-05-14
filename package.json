@@ -1,13 +1,12 @@
 {
   "name": "react-select-plus",
   "main": "lib/index.js",
-  "module": "./lib",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
     "react": "^15.5.4",
-    "react-css-themr": "2.0.0",
+    "react-css-themr": "^2.1.2",
     "react-dom": "^15.5.4",
     "react-input-autosize": "^1.1.3"
   },

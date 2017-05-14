@@ -65,6 +65,7 @@ function getServedPath(appPackageJson) {
 
 // config after eject: we're in ./config/
 module.exports = {
+	root: resolveApp('.'),
 	appBuild: resolveApp('build'),
 	devPaths: [resolveApp('src'), resolveApp('Examples')],
 	appPublic: resolveApp('public'),

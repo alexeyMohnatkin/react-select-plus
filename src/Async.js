@@ -216,4 +216,5 @@ Async.defaultProps = {
 	loadingPlaceholder: 'Loading...',
 	options: [],
 	searchPromptText: 'Type to search',
+	...Async.defaultProps,
 };

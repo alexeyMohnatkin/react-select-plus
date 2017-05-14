@@ -7,15 +7,10 @@
 .Select {
 	position: relative;
 
-	/*preferred box model*/
-	&,
-	& div,
-	& input,
-	& span {
+	&, & div, & input, & span {
 		box-sizing: border-box;
 	}
 
-	/*handle disabled state*/
 	&.isDisabled > .control {
 		background-color: var(--select-input-bg-disabled);
 		&:hover {
@@ -31,13 +26,19 @@
 /*base*/
 
 .control {
+	/*display: flex;
+	justify-content: space-between;
+	align-items: center;*/
+	display: table;
+	vertical-align: top;
 	background-color: var(--select-input-bg);
 	border-color: var(--select-input-border-color);
 	border-radius: var(--select-input-border-radius);
-	border: var(--select-input-border-width) solid var(--select-input-border-color);
+	border-width: var(--select-input-border-width);
+	border-style: solid;
+	border-color: var(--select-input-border-color);
 	color: var(--select-text-color);
 	cursor: default;
-	display: table;
 	border-spacing: 0;
 	border-collapse: separate;
 	height: var(--select-input-height);
@@ -45,6 +46,7 @@
 	overflow: hidden;
 	position: relative;
 	width: 100%;
+	font-size: var(--select-font-size);
 
 	&:hover {
 		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
@@ -58,6 +60,9 @@
 .isSearchable {
 	&.isOpen > .control {
 		cursor: text;
+	}
+	&.isOpen .placeholder {
+		display: block;
 	}
 }
 
@@ -86,17 +91,24 @@
 }
 
 /*placeholder*/
+
+.placeholder {
+	display: none;
+	opacity: .5;
+	font-size: .9em;
+}
+
 .placeholder,
 .single > .control .value {
-	bottom: 0;
-	color: var(--select-input-placeholder);
-	left: 0;
-	line-height: var(--select-input-internal-height);
-	padding-left: var(--select-padding-horizontal);
-	padding-right: var(--select-padding-horizontal);
 	position: absolute;
+	bottom: 0;
+	left: 0;
 	right: 0;
 	top: 0;
+	padding-left: var(--select-padding-horizontal);
+	padding-right: var(--select-padding-horizontal);
+	color: var(--select-input-placeholder);
+	line-height: var(--select-input-internal-height);
 
 	/*crop text*/
 	max-width: 100%;
@@ -110,7 +122,7 @@
 	& .valueLabel {
 		color: var(--select-text-color);
 	}
-	& a.value-label {
+	& a.valueLabel {
 		cursor: pointer;
 		text-decoration: none;
 
@@ -195,10 +207,10 @@
 	width: var(--select-clear-width);
 }
 
-.multi .multi-value-wrapper {
+.multi .multiValueWrapper {
   display: inline-block;
 }
-.Select .aria-only {
+.Select .ariaOnly {
 	display: inline-block;
 	height: 1px;
 	width: 1px;

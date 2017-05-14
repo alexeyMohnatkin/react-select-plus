@@ -2,11 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { themr } from 'react-css-themr';
 
-import defaultTheme from '../css/default.css';
-@themr('React-Select-Plus', defaultTheme)
+@themr('React-Select-Plus')
 class Value extends Component {
-
 	static displayName = 'Value';
+	static propTypes = {
+		children: PropTypes.node,
+		disabled: PropTypes.bool, // disabled prop passed to ReactSelect
+		id: PropTypes.string, // Unique id for the value - used for aria
+		onClick: PropTypes.func, // method to handle click on value label
+		onRemove: PropTypes.func, // method to handle removal of the value
+		value: PropTypes.object.isRequired, // the option object for this value
+	};
+
 
 	constructor(props) {
 		super(props);
@@ -105,14 +112,5 @@ class Value extends Component {
 	}
 
 }
-
-Value.propTypes = {
-	children: PropTypes.node,
-	disabled: PropTypes.bool, // disabled prop passed to ReactSelect
-	id: PropTypes.string, // Unique id for the value - used for aria
-	onClick: PropTypes.func, // method to handle click on value label
-	onRemove: PropTypes.func, // method to handle removal of the value
-	value: PropTypes.object.isRequired, // the option object for this value
-};
 
 module.exports = Value;
