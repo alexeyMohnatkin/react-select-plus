@@ -43,8 +43,8 @@ const invalidOptions = {};
 @themr('React-Select-Plus')
 class Select extends Component {
 	static displayName = 'Select';
-	static propTypes = propTypes;
-	static defaultProps = defaultProps;
+	static propTypes = { ...propTypes, ...Select.propTypes };
+	static defaultProps = { ...defaultProps, ...Select.defaultProps };
 
 	constructor(props) {
 		super(props);
@@ -1056,7 +1056,21 @@ class Select extends Component {
 		let focusedOption = this.state.focusedOption || selectedOption;
 
 		if (focusedOption && !focusedOption.disabled) {
-			let focusedOptionIndex = -1;
+			const focusedOptionIndex = options.indexOf(focusedOption);
+
+			if (focusedOptionIndex !== -1) {
+				return focusedOptionIndex;
+			}
+
+			if (this.state.inputValue) {
+				for (let i = 0; i < options.length; i++) {
+					if (!options[i].disabled) return i;
+				}
+			}
+
+			return null;
+
+			/*let focusedOptionIndex = -1;
 
 			options.some((option, index) => {
 				const isOptionEqual = option.value === focusedOption.value;
@@ -1068,7 +1082,7 @@ class Select extends Component {
 			});
 			if (focusedOptionIndex !== -1) {
 				return focusedOptionIndex;
-			}
+			}*/
 		}
 
 		for (let i = 0; i < options.length; i++) {

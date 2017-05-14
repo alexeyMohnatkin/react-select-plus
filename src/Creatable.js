@@ -13,7 +13,7 @@ function defaultChildren(props) {
 class Creatable extends Component {
 	static displayName = 'CreatableSelect';
 	static propTypes = propTypes;
-	static defaultProps = defaultProps;
+	static defaultProps = { ...defaultProps, ...Creatable.defaultProps };
 
 	constructor(props) {
 		super(props);

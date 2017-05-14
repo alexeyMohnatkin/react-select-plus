@@ -37,6 +37,12 @@
 
 /*option groups*/
 
+.optionGroup {
+	& .option {
+		padding: var(--select-padding-vertical) calc(var(--select-padding-horizontal) * 2);
+	}
+}
+
 .optionGroupLabel {
 	box-sizing: border-box;
 	background-color: var(--select-option-bg);

@@ -21,6 +21,7 @@ Variables
 	--select-input-placeholder:          #aaa;
 	--select-text-color:                 #333;
 	--select-link-hover-color:           var(--select-input-border-focus);
+	--select-font-size:									 16px;
 
 	--select-padding-vertical:           8px;
 	--select-padding-horizontal:         10px;
@@ -29,6 +30,7 @@ Variables
 	--select-menu-zindex:                1000;
 	--select-menu-max-height:            200px;
 
+	--select-option-group-label-color:  #999;
 	--select-option-color:               color(var(--select-text-color) lightness(+20%));
 	--select-option-bg:                  var(--select-input-bg);
 	--select-option-focused-color:       var(--select-text-color);
