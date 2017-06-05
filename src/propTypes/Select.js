@@ -22,6 +22,7 @@ export const propTypes = {
 	'aria-label': PropTypes.string,       // Aria label (for assistive tech)
 	'aria-labelledby': PropTypes.string,	// HTML ID of an element that should be used as the label (for assistive tech)
 	'arrowRenderer': PropTypes.func,				// Create drop-down caret element
+	'hideArrowOnSingleValue': PropTypes.bool,	// Hide arrow on single value
 	'autoBlur': PropTypes.bool,             // automatically blur the component when an option is selected
 	'autofocus': PropTypes.bool,            // autofocus the component on mount
 	'autosize': PropTypes.bool,             // whether to enable autosizing or not
@@ -97,6 +98,7 @@ export const propTypes = {
 export const defaultProps = {
 	addLabelText: 'Add "{label}"?',
 	arrowRenderer: defaultArrowRenderer,
+	hideArrowOnSingleValue: false,
 	autosize: true,
 	backspaceRemoves: true,
 	backspaceToRemoveMessage: 'Press backspace to remove {label}',

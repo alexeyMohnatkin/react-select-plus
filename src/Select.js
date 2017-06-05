@@ -881,9 +881,12 @@ class Select extends Component {
 	renderArrow() {
 		const onMouseDown = this.handleMouseDownOnArrow;
 		const isOpen = this.state.isOpen;
-		const { theme } = this.props;
+		const { theme, hideArrowOnSingleValue } = this.props;
 		const Arrow = this.props.arrowRenderer;
 
+		if (hideArrowOnSingleValue && this.props.options.length === 1 && this.props.value) {
+			return null;
+		}
 		return (
 			<span
 				className={theme.arrowZone}

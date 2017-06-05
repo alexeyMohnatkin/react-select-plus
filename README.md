@@ -69,19 +69,19 @@ When the value is changed, `onChange(selectedValueOrValues)` will fire.
 var Select = require('react-select-plus');
 
 var options = [
-  { value: 'one', label: 'One' },
-  { value: 'two', label: 'Two' }
+	{ value: 'one', label: 'One' },
+	{ value: 'two', label: 'Two' }
 ];
 
 function logChange(val) {
-  console.log("Selected: " + val);
+	console.log("Selected: " + val);
 }
 
 <Select
-  name="form-field-name"
-  value="one"
-  options={options}
-  onChange={logChange}
+	name="form-field-name"
+	value="one"
+	options={options}
+	onChange={logChange}
 />
 ```
 
@@ -104,8 +104,8 @@ You can enable multi-value selection by setting `multi={true}`. In this mode:
 * By default, selected options can be cleared. To disable the possibility of clearing a particular option, add `clearableValue: false` to that option:
 ```javascript
 var options = [
-  { value: 'one', label: 'One' },
-  { value: 'two', label: 'Two', clearableValue: false }
+	{ value: 'one', label: 'One' },
+	{ value: 'two', label: 'Two', clearableValue: false }
 ];
 ```
 Note: the `clearable` prop of the Select component should also be set to `false` to prevent allowing clearing all fields at once
@@ -126,22 +126,22 @@ Unless you specify the property `autoload={false}` the control will automaticall
 var Select = require('react-select-plus');
 
 var getOptions = function(input, callback) {
-  setTimeout(function() {
-    callback(null, {
-      options: [
-        { value: 'one', label: 'One' },
-        { value: 'two', label: 'Two' }
-      ],
-      // CAREFUL! Only set this to true when there are no more options,
-      // or more specific queries will not be sent to the server.
-      complete: true
-    });
-  }, 500);
+	setTimeout(function() {
+		callback(null, {
+			options: [
+				{ value: 'one', label: 'One' },
+				{ value: 'two', label: 'Two' }
+			],
+			// CAREFUL! Only set this to true when there are no more options,
+			// or more specific queries will not be sent to the server.
+			complete: true
+		});
+	}, 500);
 };
 
 <Select.Async
-    name="form-field-name"
-    loadOptions={getOptions}
+		name="form-field-name"
+		loadOptions={getOptions}
 />
 ```
 
@@ -165,18 +165,18 @@ import Select from 'react-select-plus';
  */
 
 const getOptions = (input) => {
-  return fetch(`/users/${input}.json`)
-    .then((response) => {
-      return response.json();
-    }).then((json) => {
-      return { options: json };
-    });
+	return fetch(`/users/${input}.json`)
+		.then((response) => {
+			return response.json();
+		}).then((json) => {
+			return { options: json };
+		});
 }
 
 <Select.Async
-  name="form-field-name"
-  value="one"
-  loadOptions={getOptions}
+	name="form-field-name"
+	value="one"
+	loadOptions={getOptions}
 />
 ```
 
@@ -190,9 +190,9 @@ var Select = require('react-select-plus');
 var isLoadingExternally = true;
 
 <Select
-  name="form-field-name"
-  isLoading={isLoadingExternally}
-  ...
+	name="form-field-name"
+	isLoading={isLoadingExternally}
+	...
 />
 ```
 
@@ -206,7 +206,7 @@ The easiest way to use it is like so:
 import { Creatable } from 'react-select-plus';
 
 function render (selectProps) {
-  return <Creatable {...selectProps} />;
+	return <Creatable {...selectProps} />;
 };
 ```
 
@@ -233,10 +233,10 @@ import React from 'react';
 import { AsyncCreatable } from 'react-select-plus';
 
 function render (props) {
-  // props can be a mix of Async, Creatable, and Select properties
-  return (
-    <AsyncCreatable {...props} />
-  );
+	// props can be a mix of Async, Creatable, and Select properties
+	return (
+		<AsyncCreatable {...props} />
+	);
 }
 ```
 
@@ -298,13 +298,13 @@ You can manipulate the input using the onInputChange and returning a new value.
 
 ```js
 function cleanInput(inputValue) {
-    // Strip all non-number characters from the input
-    return inputValue.replace(/[^0-9]/g, "");
+		// Strip all non-number characters from the input
+		return inputValue.replace(/[^0-9]/g, "");
 }   
 
 <Select
-    name="form-field-name"
-    onInputChange={cleanInput}
+		name="form-field-name"
+		onInputChange={cleanInput}
 />
 ```
 
@@ -315,20 +315,20 @@ You can extend or override this behavior by providing a `onInputKeyDown` callbac
 
 ```js
 function onInputKeyDown(event) {
-    switch (event.keyCode) {
-        case 9:   // TAB
-            // Extend default TAB behavior by doing something here
-            break;
-        case 13: // ENTER
-            // Override default ENTER behavior by doing stuff here and then preventing default
-            event.preventDefault();
-            break;
-    }
+		switch (event.keyCode) {
+				case 9:   // TAB
+						// Extend default TAB behavior by doing something here
+						break;
+				case 13: // ENTER
+						// Override default ENTER behavior by doing stuff here and then preventing default
+						event.preventDefault();
+						break;
+		}
 }
 
 <Select
-    {...otherProps}
-    onInputKeyDown={onInputKeyDown}
+		{...otherProps}
+		onInputKeyDown={onInputKeyDown}
 />
 ```
 
@@ -338,7 +338,8 @@ function onInputKeyDown(event) {
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
 | addLabelText | string | 'Add "{label}"?' | text to display when `allowCreate` is true |
-  arrowRenderer | func | undefined | Renders a custom drop-down arrow to be shown in the right-hand side of the select: `arrowRenderer({ onMouseDown, isOpen })` |
+	arrowRenderer | func | undefined | Renders a custom drop-down arrow to be shown in the right-hand side of the select: `arrowRenderer({ onMouseDown, isOpen })` |
+| hideArrowOnSingleValue | bool | false | Hides arrow if there's only 1 value and it's selected |
 | autoBlur | bool | false | Blurs the input element after a selection has been made. Handy for lowering the keyboard on mobile devices |
 | autofocus | bool | undefined | autofocus the component on mount |
 | autoload | bool | true | whether to auto-load the default async options set |
