@@ -83,6 +83,7 @@ export const propTypes = {
 	'resetValue': PropTypes.any,            // value to use when you clear the control
 	'scrollMenuIntoView': PropTypes.bool,   // boolean to enable the viewport to shift so that the full menu fully visible when engaged
 	'searchable': PropTypes.bool,           // whether to enable searching feature or not
+	'searchValue': PropTypes.string,           // whether to enable searching feature or not
 	'simpleValue': PropTypes.bool,          // pass the value to onChange as a simple value (legacy pre 1.0 mode), defaults to false
 	'style': PropTypes.object,              // optional style to apply to the control
 	'tabIndex': PropTypes.string,           // optional tab index of the control

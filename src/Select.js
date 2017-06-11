@@ -106,6 +106,10 @@ class Select extends Component {
 
 			handler && handler();
 		}
+
+		if (nextProps.filterValue !== this.props.filterValue) {
+			this.setFilterValue(nextProps.filterValue);
+		}
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -180,6 +184,10 @@ class Select extends Component {
         this.menuContainer && !this.menuContainer.contains(event.target)) {
 			this.closeMenu();
 		}
+	}
+
+	setFilterValue(filterValue) {
+		this.setState({ inputValue: filterValue });
 	}
 
 	focus() {
