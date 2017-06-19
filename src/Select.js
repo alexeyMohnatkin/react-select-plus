@@ -188,6 +188,7 @@ class Select extends Component {
 
 	setFilterValue(filterValue) {
 		this.setState({ inputValue: filterValue });
+		this.focus();
 	}
 
 	focus() {
