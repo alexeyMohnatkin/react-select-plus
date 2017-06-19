@@ -1,10 +1,12 @@
 import React from 'react';
 
-export default function arrowRenderer({ onMouseDown }) {
+const arrowRenderer =({ theme, onMouseDown }) => {
 	return (
 		<span
-			className="Select-arrow"
+			className={theme.arrow}
 			onMouseDown={onMouseDown}
 		/>
 	);
-}
+};
+
+export default arrowRenderer;

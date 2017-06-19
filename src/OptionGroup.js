@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { themr } from 'react-css-themr';
 
+import defaultTheme from '../css/default.css';
+@themr('React-Select-Plus', defaultTheme)
 class OptionGroup extends Component {
 
 	constructor(props) {
@@ -52,6 +55,7 @@ class OptionGroup extends Component {
 	render() {
 		var { option } = this.props;
 		var className = classNames(this.props.className, option.className);
+		const { theme } = this.props;
 
 		return option.disabled ? (
 			<div className={className}
@@ -69,7 +73,7 @@ class OptionGroup extends Component {
 				onTouchMove={this.handleTouchMove}
 				onTouchEnd={this.handleTouchEnd}
 				title={option.title}>
-				<div className="Select-option-group-label">
+				<div className={theme.optionGroupLabel}>
 					{this.props.label}
 				</div>
 				{this.props.children}

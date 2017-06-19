@@ -1,0 +1,101 @@
+/*
+ Select Menu
+ ------------------------------
+*/
+
+/*wrapper around the menu*/
+
+.menuOuter {
+	/*
+	Unfortunately, having both border-radius and allows scrolling using overflow defined on the same
+	element forces the browser to repaint on scroll.  However, if these definitions are split into an
+	outer and an inner element, the browser is able to optimize the scrolling behavior and does not
+	have to repaint on scroll.
+	*/
+	border-bottom-radius: var(--select-input-border-radius);
+	background-color: var(--select-input-bg);
+	border: 1px solid var(--select-input-border-color);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+	box-sizing: border-box;
+	margin-top: -1px;
+	max-height: var(--select-menu-max-height);
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	z-index: var(--select-menu-zindex);
+	-webkit-overflow-scrolling: touch;
+}
+
+
+/*wrapper*/
+
+.menu {
+	max-height: calc(var(--select-menu-max-height) - 2px);
+	overflow-y: auto;
+}
+
+
+/*option groups*/
+
+.optionGroup {
+	& .option {
+		padding: var(--select-padding-vertical) calc(var(--select-padding-horizontal) * 2);
+	}
+}
+
+.optionGroupLabel {
+	box-sizing: border-box;
+	background-color: var(--select-option-bg);
+	color: var(--select-option-color);
+	font-weight: bold;
+	cursor: default;
+	display: block;
+	padding: var(--select-padding-vertical) var(--select-padding-horizontal);
+}
+
+.optionGroupLabel ~ .option,
+.optionGroupLabel ~ .optionGroup {
+	padding-left: calc(var(--select-padding-horizontal) * 2);
+}
+
+/*options*/
+
+.option {
+	box-sizing: border-box;
+	background-color: var(--select-option-bg);
+	color: var(--select-option-color);
+	cursor: pointer;
+	display: block;
+	padding: var(--select-padding-vertical) var(--select-padding-horizontal);
+
+	&:last-child {
+		border-bottom-radius: var(--select-input-border-radius);
+	}
+
+	&.isSelected {
+		background-color: var(--select-option-selected-bg);
+		color: var(--select-option-selected-color);
+	}
+
+	&.isFocused {
+		background-color: var(--select-option-focused-bg);
+		color: var(--select-option-focused-color);
+	}
+
+	&.isDisabled {
+		color: var(--select-option-disabled-color);
+		cursor: default;
+	}
+
+}
+
+
+/*no results*/
+
+.noresults {
+	box-sizing: border-box;
+	color: var(--select-noresults-color);
+	cursor: default;
+	display: block;
+	padding: var(--select-padding-vertical) var(--select-padding-horizontal);
+}

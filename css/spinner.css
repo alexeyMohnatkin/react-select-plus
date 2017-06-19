@@ -1,0 +1,30 @@
+/*
+Spinner
+------------------------------
+*/
+
+/*loading indicator*/
+.spinnerZone {
+	cursor: pointer;
+	display: table-cell;
+	position: relative;
+	text-align: center;
+	vertical-align: middle;
+	width: var(--select-spinner-size);
+}
+.spinner {
+	vertical-align: middle;
+	animation: Select-animation-spin 400ms infinite linear;
+	width: var(--select-spinner-size);
+	height: var(--select-spinner-size);
+	box-sizing: border-box;
+	border-radius: 50%;
+	border: calc((var(--select-spinner-size) / 8)) solid var(--select-spinner-color-bg);
+	border-right-color: var(--select-spinner-color);
+	display: inline-block;
+	position: relative;
+}
+
+@keyframes Select-animation-spin {
+	to { transform: rotate(1turn); }
+}
